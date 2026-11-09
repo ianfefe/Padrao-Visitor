@@ -1,0 +1,46 @@
+classDiagram
+    class AlimentoEntrega {
+        <<interface>>
+        +aceitar(Visitor visitor)
+    }
+
+    class Visitor {
+        <<interface>>
+        +entregarComida(Comida comida)
+        +entregarBebida(Bebida bebida)
+    }
+
+    class Comida {
+        -String nome
+        -String categoria
+        +Comida(String nome, String categoria)
+        +getNome() String
+        +getCategoria() String
+        +aceitar(Visitor visitor)
+    }
+
+    class Bebida {
+        -String nome
+        -String categoria
+        +Bebida(String nome, String categoria)
+        +getNome() String
+        +getCategoria() String
+        +aceitar(Visitor visitor)
+    }
+
+    class Garcom {
+        +entregar(AlimentoEntrega alimento)
+        +entregarComida(Comida comida)
+        +entregarBebida(Bebida bebida)
+    }
+
+    AlimentoEntrega <|.. Comida
+    AlimentoEntrega <|.. Bebida
+    Visitor <|.. Garcom
+
+    AlimentoEntrega ..> Visitor
+    Garcom ..> AlimentoEntrega
+    Garcom ..> Comida
+    Garcom ..> Bebida
+    Comida ..> Visitor
+    Bebida ..> Visitor
